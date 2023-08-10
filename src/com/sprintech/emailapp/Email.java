@@ -1,5 +1,7 @@
 package com.sprintech.emailapp;
 
+import java.util.Scanner;
+
 public class Email {
     
     private String firstName;
@@ -14,9 +16,27 @@ public class Email {
         this.firstName = firstName;
         this.lastName = lastName;
         System.out.println("EMAIL CREATED: " + this.firstName + " " + this.lastName);
+
+        //call a method asking for the department - return the department
+        this.department = setDepartment();
     }
 
     //ask for department
+    private String setDepartment(){
+        System.out.println("Enter the Department\n1 for Sales\n2 for Engineering\n3 for Accounting\n0 for none");
+        Scanner input = new Scanner(System.in);
+        int departmentChoice = input.nextInt();     
+
+        if(departmentChoice == 1){
+            return "Sales";
+        }else if(departmentChoice ==2){
+            return "Engineering";
+        }else if (departmentChoice == 3) {
+            return "Accounting";
+        }else{
+            return "";
+        }
+    }
 
     //generate a random password
 
