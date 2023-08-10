@@ -29,7 +29,7 @@ public class Email {
         System.out.println("Your Password is: "+ password);
 
         //combone elements to generate email:
-        email = firstName.toLowerCase() + "." + lastName.toLowerCase()+ "@" + department.toLowerCase() + companySuffix;
+        email = firstName.toLowerCase() + "." + lastName.toLowerCase()+ "@" + department.toLowerCase()+"."+ companySuffix;
         System.out.println("Your Email is : "+ email);
         
     }
