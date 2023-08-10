@@ -19,11 +19,12 @@ public class Email {
 
         //call a method asking for the department - return the department
         this.department = setDepartment();
+        System.out.println("Department: "+ this.department);
     }
 
     //ask for department
     private String setDepartment(){
-        System.out.println("Enter the Department\n1 for Sales\n2 for Engineering\n3 for Accounting\n0 for none");
+        System.out.println("DEPARTMENT CODES:\n1 for Sales\n2 for Engineering\n3 for Accounting\n0 for none\nEnter Department Code:");
         Scanner input = new Scanner(System.in);
         int departmentChoice = input.nextInt();     
 
