@@ -1,15 +1,45 @@
-pipeline { 
-    agent any  
-    stages { 
-        stage('Starting App') { 
-            steps { 
-               echo 'This is a minimal pipeline.' 
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+
+    stages {
+        stage('Getting the project from GIT') {
+            steps {
+               echo 'Pulling..';
+                git branch: 'main',
+                url: 'https://github.com/user/project.git';
             }
         }
-        stage('Build') { 
-            steps { 
-               sh 'mvn -B -DskipTests clean package' 
+        
+    stage('Cleaning the project') {
+             
+            steps {
+                echo 'cleaning project ...'
+                sh 'mvn clean'
             }
         }
+        
+    stage('Artifact Construction') {
+             
+            steps {
+                echo "artificat contruction"
+                sh 'mvn package'
+            }
+        }
+
+                stage ('Build') {
+            steps {
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
+        }
+
     }
 }
