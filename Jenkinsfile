@@ -10,7 +10,7 @@ pipeline {
             steps {
                echo 'Pulling..';
                 git branch: 'main',
-                url: 'https://github.com/user/project.git';
+                url: 'https://github.com/akibirio/email_application.git';
             }
         }
         
