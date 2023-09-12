@@ -1,42 +1,16 @@
 pipeline {
-    agent any
-   
-
-    stages {
-        stage('Getting the project from GIT') {
-            steps {
-               echo 'Pulling..';
-                git branch: 'main',
-                url: 'https://github.com/akibirio/email_application.git';
-            }
-        }
-        
-    stage('Cleaning the project') {
-             
-            steps {
-                echo 'cleaning project ...'
-                sh 'mvn clean'
-            }
-        }
-        
-    stage('Artifact Construction') {
-             
-            steps {
-                echo "artificat contruction"
-                sh 'mvn package'
-            }
-        }
-
-                stage ('Build') {
-            steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install' 
-            }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml' 
-                }
-            }
-        }
-
+  agent any
+  stages {
+    stage('Log Ant version info') {
+      steps {
+        sh 'ant -version'
+      }
     }
+    stage('GitHub Jenkins Ant Build') {
+      steps {
+        git 'https://github.com/akibirio/email_application.git'
+        sh 'ant clean compile test package war'
+      }
+    }
+  }
 }
